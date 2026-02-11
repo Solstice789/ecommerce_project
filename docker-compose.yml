@@ -1,0 +1,48 @@
+services:
+  db:
+    image: postgres:18
+    container_name: ecommerce_skeleton_db
+    environment:
+      POSTGRES_DB: ecommerce
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: toor
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U root -d ecommerce"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./ecommerce_skeleton_backend
+    container_name: ecommerce_skeleton_backend
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: ecommerce
+      DB_USER: root
+      DB_PASSWORD: toor
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q"]
+      interval: 15s
+      timeout: 5s
+      retries: 8
+
+  frontend:
+    build:
+      context: ./ecommerce_skeleton_frontend
+    container_name: ecommerce_skeleton_frontend
+    environment:
+      NEXT_PUBLIC_API_BASE_URL: http://localhost:8080
+    depends_on:
+      backend:
+        condition: service_started
+    ports:
+      - "3000:3000"
