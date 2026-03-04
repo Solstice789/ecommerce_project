@@ -24,6 +24,14 @@ public class ProductService {
         return products;
     }
 
+    public List<ProductDto> getProductsByName(String name) {
+        List<ProductDto> products = productRepository.findAllByNameIgnoreCase(name).stream()
+                .map(product -> new ProductDto(product.getId(), product.getName()))
+                .toList();
+        log.debug("Products successfully retrieved from database with, name={}", name);
+        return products;
+    }
+
     public ProductDto createProduct(CreateProductRequest request) {
         Product product = new Product();
         product.setName(request.name().trim());
