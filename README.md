@@ -112,7 +112,7 @@ CREATE TABLE products (
 Navigate to the backend directory:
 
 ```bash
-cd backend
+cd ecommerce_skeleton_backend
 ```
 
 Run using the Maven wrapper:
@@ -141,7 +141,7 @@ http://localhost:8080
 Navigate to the frontend directory:
 
 ```bash
-cd frontend
+cd ecommerce_skeleton_frontend
 npm install
 npm run dev
 ```
