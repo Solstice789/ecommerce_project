@@ -46,9 +46,9 @@ This runs the **frontend, backend, and database together**.
 
 Install the following:
 
-- Node.js (v18+)
+- Node.js (v24)
 - JDK 21
-- PostgreSQL (v14+)
+- PostgreSQL (v18)
 - Maven (or use the included Maven wrapper)
 
 ---
@@ -66,8 +66,8 @@ Example configuration used by the containers:
 - host: localhost  
 - port: 5432  
 - database: ecommerce  
-- username: postgres  
-- password: postgres  
+- username: root  
+- password: toor  
 
 Example docker-compose snippet:
 
