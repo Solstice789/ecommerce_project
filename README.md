@@ -74,7 +74,7 @@ Example docker-compose snippet:
 ```yaml
 services:
   postgres:
-    image: postgres:15
+    image: postgres:18
     environment:
       POSTGRES_DB: ecommerce
       POSTGRES_USER: root
