@@ -1,0 +1,5 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/001-create-products.yaml
+  - include:
+      file: db/changelog/002-insert-init-products.yaml

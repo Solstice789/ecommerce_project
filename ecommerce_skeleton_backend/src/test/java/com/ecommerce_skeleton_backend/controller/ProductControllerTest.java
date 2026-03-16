@@ -5,7 +5,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.ecommerce_skeleton_backend.dto.ProductDto;
+import com.ecommerce_skeleton_backend.dto.ProductResponse;
 import com.ecommerce_skeleton_backend.service.ProductService;
 import java.util.List;
 import java.util.UUID;
@@ -25,9 +25,9 @@ class ProductControllerTest {
     private ProductService productService;
 
     @Test
-    void getProductsShouldReturnArray() throws Exception {
+    void getProductList() throws Exception {
         UUID id = UUID.randomUUID();
-        when(productService.listProducts()).thenReturn(List.of(new ProductDto(id, "Mouse")));
+        when(productService.listProducts()).thenReturn(List.of(new ProductResponse(id, "Mouse")));
 
         mockMvc.perform(get("/api/products"))
                 .andExpect(status().isOk())

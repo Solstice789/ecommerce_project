@@ -1,7 +1,8 @@
 package com.ecommerce_skeleton_backend.controller;
 
 import com.ecommerce_skeleton_backend.dto.CreateProductRequest;
-import com.ecommerce_skeleton_backend.dto.ProductDto;
+import com.ecommerce_skeleton_backend.dto.ProductResponse;
+import com.ecommerce_skeleton_backend.dto.ProductResponse;
 import com.ecommerce_skeleton_backend.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -24,18 +25,9 @@ public class ProductController {
 
     @GetMapping
     @Operation(summary = "List products", description = "Returns all products")
-    public List<ProductDto> getProducts() {
-        List<ProductDto> products = productService.listProducts();
+    public List<ProductResponse> getProducts() {
+        List<ProductResponse> products = productService.listProducts();
         log.debug("All {} products successfully retrieved", products.size());
-
-        return products;
-    }
-
-    @GetMapping("/{name}")
-    @Operation(summary = "Retrieve products by name (ignore case)", description = "Returns all products with given name")
-    public List<ProductDto> getProducts(@PathVariable String name) {
-        List<ProductDto> products = productService.getProductsByName(name);
-        log.debug("All {} products successfully retrieved with name='{}'", products.size(), name);
 
         return products;
     }
@@ -43,7 +35,7 @@ public class ProductController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create product", description = "Creates a product with a generated UUID")
-    public ProductDto createProduct(@Valid @RequestBody CreateProductRequest request) {
+    public ProductResponse createProduct(@Valid @RequestBody CreateProductRequest request) {
         log.info("Creation request received for name='{}'", request.name());
 
         return productService.createProduct(request);

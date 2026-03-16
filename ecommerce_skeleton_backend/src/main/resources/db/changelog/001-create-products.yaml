@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-create-products
+      author: Solstice789
+      changes:
+        - createTable:
+            tableName: products
+            columns:
+              - column: {name: id, type: UUID, constraints: {primaryKey: true, nullable: false}}
+              - column: {name: name, type: VARCHAR(255), constraints: {nullable: false}}
+        - createIndex:
+            tableName: products
+            indexName: idx_products_name
+            columns:
+              - column: {name: name}
